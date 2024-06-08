@@ -1,0 +1,31 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #f0f0f0;
+    padding-top: 3%;
+    padding-bottom: 3%;
+  }
+  
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 80%;
+  }
+  
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    overflow: hidden;
+  }
+  
+  .image {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+  }
+  
