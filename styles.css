@@ -50,12 +50,21 @@ body {
     transform: translate(-50%, -50%);
   }
 
-  .backButton {
+  .backButtonContainer {
     padding: 2%;
     display: flex;
     justify-content: left;
     align-items: center;
   }
+
+  .homeButton {
+    padding-right: 2%;
+  }
+
+  .backButton {
+    padding-left: 2%;
+  }
+
 
   .title {
     text-align: center;
