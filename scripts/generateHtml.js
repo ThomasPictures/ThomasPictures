@@ -34,7 +34,7 @@ async function categorizeImages(dirPath) {
 
 function generateHtmlContent(horizontal, vertical, directories, currentPath, parentPath) {
   const relativePathToRoot = path.relative(path.join(outputDir, currentPath), outputDir);
-  console.log("style", `${path.join(relativePathToRoot, 'style.css')}`)
+  // console.log("style", `${path.join(relativePathToRoot, 'style.css')}`)
   
   return `<!DOCTYPE html>
 <html lang="en">
@@ -49,11 +49,17 @@ function generateHtmlContent(horizontal, vertical, directories, currentPath, par
 
 <body>
   <div class="navigation">
-    ${relativePathToRoot.toString() !== "" ? `<a class="backButton" href="${path.join(relativePathToRoot, "index.html")}"><h2>Back</h2></a>` : ''}
+    ${relativePathToRoot.toString() !== "" ? `<div class="backButtonContainer"><a class="homeButton" href="${path.join(relativePathToRoot, 'index.html')}"><h2>Home</h2></a> | <a class="backButton" href="../index.html"><h2>Back</h2></a></div>` : ''}
     <h1 class="title">${currentPath}</h1>
   </div>
   <div class="directories">
-    ${directories.map(dir => `<div class="directory"><a href="${path.join(currentPath, dir, 'index.html')}"><div class="folderButton"><img class="image" src="folder.webp"/><h2 class="text">${dir}</h2></div></a></div>`).join('')}
+    ${directories.map((dir) => {
+      if(currentPath.toString().length > 1) {
+        return `<div class="directory"><a href="${path.join(dir, 'index.html')}"><div class="folderButton"><img class="image" src="${path.join(relativePathToRoot, 'folder.webp')}"/><h2 class="text">${dir}</h2></div></a></div>`
+      } else {
+        return `<div class="directory"><a href="${path.join(currentPath, dir, 'index.html')}"><div class="folderButton"><img class="image" src="${path.join(relativePathToRoot, 'folder.webp')}"/><h2 class="text">${dir}</h2></div></a></div>`
+      }
+    }).join('')}
   </div>
   <div class="grid" id="imageGrid">
     ${horizontal.map(file => `
@@ -110,11 +116,11 @@ async function generateHtmlForDirectory(dirPath, relativePath) {
   const { horizontal, vertical, directories } = await categorizeImages(dirPath);
   const parentPath = relativePath.split(path.sep).slice(0, -1).join(path.sep) || null;
   const htmlContent = generateHtmlContent(horizontal, vertical, directories, relativePath, parentPath);
-  console.log("parentPath", parentPath)
-  console.log("relativePath", relativePath)
+  // console.log("parentPath", parentPath)
+  // console.log("relativePath", relativePath)
   
   const outputFilePath = path.join(outputDir, relativePath, 'index.html');
-  console.log("outputFilePath", outputFilePath)
+  // console.log("outputFilePath", outputFilePath)
   // fs.writeFileSync(outputFilePath, htmlContent, {encoding: "utf8", flag: "w"});
   writeFileSyncRecursive(outputFilePath, htmlContent, "utf8")
   
