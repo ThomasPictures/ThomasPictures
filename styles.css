@@ -1,5 +1,6 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0;
@@ -28,4 +29,40 @@ body {
     width: 100%;
     object-fit: contain;
   }
-  
+
+  .directories {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    width: 80%;
+    padding-bottom: 1%;
+  }
+
+  .folderButton {
+    position: relative;
+    text-align: center;
+  }
+
+  .text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .backButton {
+    padding: 2%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+  }
+
+  .title {
+    text-align: center;
+  }
+
+  .navigation {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    width: 80%;
+  }
